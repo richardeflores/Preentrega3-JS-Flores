@@ -69,4 +69,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return depuracion * factorRacial;
     }
+
+    function buscarResultado() {
+        const idPaciente = document.getElementById('idPaciente').value;
+        const resultado = sessionStorage.getItem(idPaciente);
+    
+        const resultadoPacienteDiv = document.getElementById('resultado-paciente');
+        if (resultado) {
+            const datos = JSON.parse(resultado);
+            resultadoPacienteDiv.innerHTML = `
+                <h3>Resultado para ID de Paciente: ${datos.id}</h3>
+                <p>Sexo: ${datos.sexo}</p>
+                <p>Edad: ${datos.edad}</p>
+                <p>Peso: ${datos.peso} kg</p>
+                <p>Creatinina sérica: ${datos.creatinina} mg/dL</p>
+                <p>Depuración de creatinina: ${datos.depuracionCreatinina} ml/min</p>
+                <p>Valor de referencia: ${datos.valorReferencia}</p>
+            `;
+        } else {
+            resultadoPacienteDiv.innerHTML = `<p>No se encontró ningún resultado para el ID de paciente ingresado.</p>`;
+        }
+    }
 });
