@@ -86,6 +86,21 @@
     </form>
 
     <div id="resultado"></div>
+
+   <div id="form-id-paciente" style="display: none;">
+      <h2>Buscar resultado por ID de paciente</h2>
+      <form id="id-form">
+        <table>
+          <tr>
+            <td><label for="idPaciente">ID de Paciente:</label></td>
+            <td class="form-imput"><input type="text" id="idPaciente" required><br><br></td>
+          </tr>
+        </table>
+          <button type="button" onclick="buscarResultado()">Buscar</button>
+      </form>
+      <div id="resultado-paciente"></div>
+    </div>
+    
       <!-- <div class="projects-container">
           <div class="project">
             <a href="">
