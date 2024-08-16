@@ -15,13 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const { sexo, edad, peso, creatinina, esNegro } = datos;
+        const { identificacion, sexo, edad, peso, creatinina, esNegro } = datos;
         const factorRacial = (esNegro === 'si') ? 1.21 : 1;
         const depuracionCreatinina = calcularDepuracionCreatininaPorSexo(sexo, edad, peso, creatinina, factorRacial);
 
         // Obtener nuevo ID de paciente y guardar resultado en sessionStorage
-        const nuevoId = obtenerNuevoId();
-        const idPaciente = nuevoId;
+        const idPaciente = datos.identificacion;
         const resultado = {
             id: idPaciente,
             sexo,
@@ -53,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const datos = JSON.parse(resultado);
             resultadoPacienteDiv.innerHTML = `
                 <h3>Resultado para ID de Paciente: ${datos.id}</h3>
+                <p>ID: ${datos.identificacion}</p>
                 <p>Sexo: ${datos.sexo}</p>
                 <p>Edad: ${datos.edad}</p>
                 <p>Peso: ${datos.peso} kg</p>
@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function obtenerDatos() {
         return {
+            identificacion: document.getElementById('identificacion').value,
             sexo: document.getElementById('sexo').value,
             edad: parseFloat(document.getElementById('edad').value),
             peso: parseFloat(document.getElementById('peso').value),
