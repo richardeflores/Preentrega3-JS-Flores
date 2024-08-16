@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const datos = JSON.parse(resultado);
             resultadoPacienteDiv.innerHTML = `
                 <h3>Resultado para ID de Paciente: ${datos.id}</h3>
-                <p>ID: ${datos.identificacion}</p>
+                <p>ID: ${datos.id}</p>
                 <p>Sexo: ${datos.sexo}</p>
                 <p>Edad: ${datos.edad}</p>
                 <p>Peso: ${datos.peso} kg</p>
@@ -64,18 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
             resultadoPacienteDiv.innerHTML = `<p>No se encontró ningún resultado para el ID de paciente ingresado.</p>`;
         }
     });
-
-    function obtenerNuevoId() {
-        let ultimoId = sessionStorage.getItem('ultimoId');
-        if (ultimoId === null) {
-            ultimoId = 0;
-        } else {
-            ultimoId = parseInt(ultimoId);
-        }
-        const nuevoId = ultimoId + 1;
-        sessionStorage.setItem('ultimoId', nuevoId);
-        return nuevoId;
-    }
 
     function obtenerDatos() {
         return {
