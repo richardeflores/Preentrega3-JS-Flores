@@ -1,84 +1,94 @@
 {
     "pacientes": [
       {
-        "identificacion": "P001",
+        "identificacion": "001",
         "sexo": "hombre",
         "edad": 25,
         "peso": 70,
         "creatinina": 1.2,
-        "esNegro": "no"
+        "esNegro": "no",
+        "ifg":"93.17"
       },
       {
-        "identificacion": "P002",
+        "identificacion": "002",
         "sexo": "mujer",
         "edad": 32,
         "peso": 60,
         "creatinina": 0.9,
-        "esNegro": "si"
+        "esNegro": "si",
+        "ifg":"102.85"
       },
       {
-        "identificacion": "P003",
+        "identificacion": "003",
         "sexo": "hombre",
         "edad": 45,
         "peso": 85,
         "creatinina": 1.1,
-        "esNegro": "no"
+        "esNegro": "no",
+        "ifg":"101.96"
       },
       {
-        "identificacion": "P004",
+        "identificacion": "004",
         "sexo": "mujer",
         "edad": 58,
         "peso": 68,
         "creatinina": 1.0,
-        "esNegro": "no"
+        "esNegro": "no",
+        "ifg":"65.83"
       },
       {
-        "identificacion": "P005",
+        "identificacion": "005",
         "sexo": "hombre",
         "edad": 63,
         "peso": 78,
         "creatinina": 1.3,
-        "esNegro": "si"
+        "esNegro": "si",
+        "ifg":"77.64"
       },
       {
-        "identificacion": "P006",
+        "identificacion": "006",
         "sexo": "mujer",
         "edad": 29,
         "peso": 55,
         "creatinina": 0.8,
-        "esNegro": "no"
+        "esNegro": "no",
+        "ifg":"90.09"
       },
       {
-        "identificacion": "P007",
+        "identificacion": "007",
         "sexo": "hombre",
         "edad": 39,
         "peso": 90,
         "creatinina": 1.4,
-        "esNegro": "no"
+        "esNegro": "no",
+        "ifg":"90.18"
       },
       {
-        "identificacion": "P008",
+        "identificacion": "008",
         "sexo": "mujer",
         "edad": 47,
         "peso": 64,
         "creatinina": 1.1,
-        "esNegro": "si"
+        "esNegro": "si",
+        "ifg":"77.29"
       },
       {
-        "identificacion": "P009",
+        "identificacion": "009",
         "sexo": "hombre",
         "edad": 54,
         "peso": 80,
         "creatinina": 1.2,
-        "esNegro": "no"
+        "esNegro": "no",
+        "ifg":"79.63"
       },
       {
-        "identificacion": "P010",
+        "identificacion": "010",
         "sexo": "mujer",
         "edad": 72,
         "peso": 58,
         "creatinina": 1.3,
-        "esNegro": "no"
+        "esNegro": "no",
+        "ifg":"35.82"
       }
     ]
   }

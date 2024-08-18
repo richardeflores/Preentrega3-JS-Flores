@@ -542,3 +542,18 @@ pointer-events: none;
   opacity:0.7;
   transition: 0.5s;
 }
+
+/*Estilos para la tabla de filtración glomerular*/
+
+table#resultadosTabla {
+  table-layout: fixed;
+  background-color: white;
+  color: #333333;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#resultadosTabla,td,th {
+  padding-left: 15px;
+  padding-right: 15px;
+}

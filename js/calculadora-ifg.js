@@ -2,6 +2,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('calculadora-form');
     const resultadoDiv = document.getElementById('resultado');
     const buscarBtn = document.getElementById('buscar-btn');
+    const tablaResultadosDiv = document.getElementById('tablaResultados');
+    let pacientes = [];
+
+    // Obteniendo los pacientes desde un archivo JSON y generando la tabla
+    fetch("./pacientes.json")
+        .then((res) => res.json())
+        .then((res) => {
+            pacientes = res.pacientes;
+            const tablaHTML = generarTablaResultados(pacientes);
+            tablaResultadosDiv.innerHTML = tablaHTML;
+        })
+        .catch((error) => {
+            console.error('Error al cargar los datos:', error);
+            tablaResultadosDiv.innerHTML = `<p>Error al cargar los datos de los pacientes.</p>`;
+        });
 
     form.addEventListener('submit', function(event) {
         event.preventDefault(); // Evita que el formulario se envíe de la forma tradicional
@@ -24,10 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (depuracionCreatinina < valorReferencia) {
             Swal.fire({
                 title: "Debe consultar con el médico",
-                text: "Los valores estan bajo el rango de referencia",
+                text: "Los valores están bajo el rango de referencia",
                 icon: "warning",
                 timer: 5000,
-                showConfirmButton:false,
+                showConfirmButton: false,
             });
         }
 
@@ -69,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p>Edad: ${datos.edad}</p>
                 <p>Peso: ${datos.peso} kg</p>
                 <p>Creatinina sérica: ${datos.creatinina} mg/dL</p>
-                <p>Indice de filtracion glomerular: ${datos.depuracionCreatinina} ml/min</p>
+                <p>Índice de filtración glomerular: ${datos.depuracionCreatinina} ml/min</p>
                 <p>Valor de referencia: ${datos.valorReferencia} ml/min</p>
             `;
         } else {
@@ -89,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function sonDatosValidos(datos) {
-        // Aquí puedes añadir validaciones adicionales si es necesario
         return datos.edad > 0 && datos.peso > 0 && datos.creatinina > 0;
     }
 
@@ -118,5 +132,45 @@ document.addEventListener('DOMContentLoaded', function() {
             default:
                 return 75;
         }
+    }
+
+    function generarTablaResultados(pacientes) {
+        let tabla = `
+            <table id="resultadosTabla">
+            <h2 id="titulo-buscar">Tabla de Resultados</h2>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Sexo</th>
+                        <th>Edad</th>
+                        <th>Peso (kg)</th>
+                        <th>Creatinina (mg/dL)</th>
+                        <th>Es de raza negra</th>
+                        <th>IFG</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        pacientes.forEach(paciente => {
+            tabla += `
+                <tr>
+                    <td>${paciente.identificacion}</td>
+                    <td>${paciente.sexo}</td>
+                    <td>${paciente.edad}</td>
+                    <td>${paciente.peso}</td>
+                    <td>${paciente.creatinina}</td>
+                    <td>${paciente.esNegro === 'si' ? 'Sí' : 'No'}</td>
+                    <td>${paciente.ifg}</td>
+                </tr>
+            `;
+        });
+
+        tabla += `
+                </tbody>
+            </table>
+        `;
+
+        return tabla;
     }
 });
