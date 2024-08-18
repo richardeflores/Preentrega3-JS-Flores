@@ -18,6 +18,18 @@ document.addEventListener('DOMContentLoaded', function() {
         const { identificacion, sexo, edad, peso, creatinina, esNegro } = datos;
         const factorRacial = (esNegro === 'si') ? 1.21 : 1;
         const depuracionCreatinina = calcularDepuracionCreatininaPorSexo(sexo, edad, peso, creatinina, factorRacial);
+        const valorReferencia = obtenerValorReferenciaPorEdad(edad);
+
+        // Verifica si la depuración creatinina supera el valor de referencia
+        if (depuracionCreatinina < valorReferencia) {
+            Swal.fire({
+                title: "Debe consultar con el médico",
+                text: "Los valores estan bajo el rango de referencia",
+                icon: "warning",
+                timer: 5000,
+                showConfirmButton:false,
+            });
+        }
 
         // Obtener nuevo ID de paciente y guardar resultado en sessionStorage
         const idPaciente = datos.identificacion;
@@ -28,15 +40,15 @@ document.addEventListener('DOMContentLoaded', function() {
             peso,
             creatinina,
             depuracionCreatinina: depuracionCreatinina.toFixed(2),
-            valorReferencia: sexo === 'hombre' ? '90-120 ml/min' : '80-120 ml/min'
+            valorReferencia
         };
         sessionStorage.setItem(idPaciente, JSON.stringify(resultado));
 
         // Muestra el resultado en el div, incluyendo el ID del paciente
         resultadoDiv.innerHTML = `
             <h3>ID de Paciente: ${idPaciente}</h3>
-            <p>Su depuración de creatinina estimada es: ${depuracionCreatinina.toFixed(2)} ml/min</p>
-            <p>${sexo === 'hombre' ? 'Valor normal para hombres: 90-120 ml/min' : 'Valor normal para mujeres: 80-120 ml/min'}</p>
+            <p>Su Tasa de Filtración Glomerular estimada es: ${depuracionCreatinina.toFixed(2)} ml/min</p>
+            <p>Valor de referencia para su grupo de edad: ${valorReferencia} ml/min</p>
         `;
 
         // Mostrar formulario para buscar por ID de paciente
@@ -57,8 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p>Edad: ${datos.edad}</p>
                 <p>Peso: ${datos.peso} kg</p>
                 <p>Creatinina sérica: ${datos.creatinina} mg/dL</p>
-                <p>Depuración de creatinina: ${datos.depuracionCreatinina} ml/min</p>
-                <p>Valor de referencia: ${datos.valorReferencia}</p>
+                <p>Indice de filtracion glomerular: ${datos.depuracionCreatinina} ml/min</p>
+                <p>Valor de referencia: ${datos.valorReferencia} ml/min</p>
             `;
         } else {
             resultadoPacienteDiv.innerHTML = `<p>No se encontró ningún resultado para el ID de paciente ingresado.</p>`;
@@ -89,5 +101,22 @@ document.addEventListener('DOMContentLoaded', function() {
             depuracion = ((140 - edad) * peso) / (72 * creatinina) * 0.85;
         }
         return depuracion * factorRacial;
+    }
+
+    function obtenerValorReferenciaPorEdad(edad) {
+        switch (true) {
+            case (edad >= 20 && edad <= 29):
+                return 116;
+            case (edad >= 30 && edad <= 39):
+                return 107;
+            case (edad >= 40 && edad <= 49):
+                return 99;
+            case (edad >= 50 && edad <= 59):
+                return 93;
+            case (edad >= 60 && edad <= 69):
+                return 85;
+            default:
+                return 75;
+        }
     }
 });
