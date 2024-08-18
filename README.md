@@ -1,0 +1,1 @@
+El objetivo final de la calculadora del IFG es conectarlo a una base de datos que permita registrar los pacientes a los cuales se le realizan los análisis. Que los resultados se muestren en la tabla, y la misma tabla permita las búsquedas.
